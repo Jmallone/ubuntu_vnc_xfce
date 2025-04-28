@@ -2,20 +2,22 @@ version: '3.8'
 
 services:
   ubuntu-vnc:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ubuntu-vnc
+    image: ${REGISTRY_URL:-localhost}/ubuntu-vnc:latest
+    # Não podemos usar "build" em modo Swarm
+    # Para deploy via Portainer, precisamos construir a imagem separadamente
     environment:
       - VNC_PASSWORD=${VNC_PASSWORD:-123456}
     ports:
       - "5901:5901"   # VNC server
       - "6080:6080"   # noVNC web interface
-    restart: unless-stopped
     volumes:
       - ubuntu-data:/root
       # Compartilhamento opcional com sistema host
       # - ./shared:/shared
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
 volumes:
   ubuntu-data:
