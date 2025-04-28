@@ -38,7 +38,7 @@ RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.34.0/geckod
     mv geckodriver /usr/local/bin/ && \
     chmod +x /usr/local/bin/geckodriver && \
     rm geckodriver-v0.34.0-linux64.tar.gz
-# Cria um script de inicialização
+# Copia o script de inicialização
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 # Expor as portas do container

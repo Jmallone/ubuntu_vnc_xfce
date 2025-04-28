@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  ubuntu-vnc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ubuntu-vnc
+    environment:
+      - VNC_PASSWORD=${VNC_PASSWORD:-123456}
+    ports:
+      - "5901:5901"   # VNC server
+      - "6080:6080"   # noVNC web interface
+    restart: unless-stopped
+    volumes:
+      - ubuntu-data:/root
+      # Compartilhamento opcional com sistema host
+      # - ./shared:/shared
+
+volumes:
+  ubuntu-data:
+    driver: local

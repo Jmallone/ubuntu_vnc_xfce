@@ -1,0 +1,12 @@
+# Ignorar arquivos e diretórios específicos do Docker
+.env
+shared/
+
+# Ignorar diretórios de sistema e editores
+.DS_Store
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.log
